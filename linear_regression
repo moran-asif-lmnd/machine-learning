@@ -1,0 +1,31 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+def regression (x,y):
+    return np.linalg.inv(x.T @ x) @ x.T @ y
+
+# ---------- Apply Linear regression on a linear line ------#
+
+# Create a sample data with gaussian noise
+b=2
+x=np.random.random_sample(100)
+noise = np.random.normal(0, 0.1, x.shape)
+x+=noise
+first_array=x*b+noise
+# Reshape x to be 2N matrix
+x= x.reshape(100,1)
+
+# find linear regression parameter
+h=regression(x,first_array)
+X=np.linspace(0,1,10)
+Y=h*X
+
+# plot hypothesis
+plt.scatter(x,first_array)
+plt.show()
+plt.plot(X,Y)
+plt.show()
+
+
+
+
